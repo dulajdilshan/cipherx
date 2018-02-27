@@ -5,9 +5,16 @@ import java.io.IOException;
 public class Decrypter {
 
 	static String text;
-	
+	static char[][] appendAll(char[][] sourceList,char[][] bigList,int key0,int key1) {
+		char[] temList;
+		for(int i=0;i<sourceList.length;i++) {
+			temList = sourceList[i];
+			appendToList(setList(temList, key0), bigList, i, key1);
+		}
+		return bigList;
+	}
 	static void appendToList(char[] charList,char[][] bigList,int index,int key){
-		index = (index + key)%bigList.length;
+//		index = (index + key)%bigList.length;
 		bigList[index] = charList;
 	}
 	static char[] setList(char[] sr,int key) {

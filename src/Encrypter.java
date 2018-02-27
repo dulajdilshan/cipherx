@@ -20,7 +20,7 @@ public class Encrypter {
 	}
 
 	static void appendToList(char[] charList,char[][] bigList,int index,int key){
-		index = (index + key)%bigList.length;
+//		index = (index + key)%bigList.length;
 		bigList[index] = charList;
 	}
 

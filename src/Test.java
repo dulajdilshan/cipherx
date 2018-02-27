@@ -15,15 +15,12 @@ public class Test {
 		int s_len1 = s_len + k1;
 		int y = s_len1/p;
 		int x = p;
-		
-		int[] shiftKey = {30,41,52};
-		
+
 		char[][] s_list = new char[y][x];
 		char[][] op_list = new char[y][x];
 		
 		for(int i = s_len+1;i<=((s_len/p)+1)*(p);i++) {
-			s+='A'; 
-			//t.addText('#');
+			s+=' '; 
 		}
 		
 		for(int iy=0;iy<y;iy++) {
@@ -38,8 +35,7 @@ public class Test {
 			}
 		}
 		
-		//shift the charector
-		
+		//Encrypt
 		op_list = Encrypter.appendAll(s_list, op_list, 20, 67);
 		
 		for(int iy=0;iy<y;iy++) {
@@ -48,10 +44,19 @@ public class Test {
 				System.out.print(op_list[iy][ix]);
 			}
 		}
+		save(out,"en");
 		
 		
-
-		save(out);
+		//Decrypt
+		op_list = Decrypter.appendAll(op_list, s_list, 20, 67);
+		out="";
+		for(int iy=0;iy<y;iy++) {
+			for(int ix=0;ix<x;ix++) {
+				out+=s_list[iy][ix];
+				System.out.print(s_list[iy][ix]);
+			}
+		}
+		save(out,"de");
 		
 		
 		
@@ -74,9 +79,9 @@ public class Test {
 		return t.text;
 	}
 	
-	static void save(String op) {
+	static void save(String op,String ca) {
 		try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("/home/dulaj/eclipse-workspace/CipherX_v1.0/out.txt"));
+            BufferedWriter out = new BufferedWriter(new FileWriter("/home/dulaj/eclipse-workspace/CipherX_v1.0/out"+ca+".txt"));
             out.write(op);
             out.close();
         }catch (IOException e)
