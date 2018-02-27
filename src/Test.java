@@ -1,22 +1,57 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Test {
+	static String out;
 	public static void main(String[] args) {
+		out="";
+		int[] key = {2,34,5};
+		Encrypter encrypter = new Encrypter(key);
 		String s = input();
 		int s_len = s.length();
-		int p = 10;
+		int p = 10;  // to key
+		int k1 = ((s_len/p)+1)*(p)-s_len;  // to key
+		int s_len1 = s_len + k1;
+		int y = s_len1/p;
+		int x = p;
 		
-		//Testing
-//		System.out.println((int)' ');
-//		System.out.println(s.length()+" "+(s.length()/p+1)*(p));
-	
-		for(int i = s_len+1;i<(s_len/p+1)*(p+1)-2;i++) {
-			s+='#'; 
-			System.out.println(i);
+		int[] shiftKey = {30,41,52};
+		
+		char[][] s_list = new char[y][x];
+		char[][] op_list = new char[y][x];
+		
+		for(int i = s_len+1;i<=((s_len/p)+1)*(p);i++) {
+			s+='A'; 
 			//t.addText('#');
 		}
-		System.out.println(s.length());
 		
+		for(int iy=0;iy<y;iy++) {
+			for(int ix=0;ix<x;ix++) {
+				s_list[iy][ix] = s.charAt(ix+(10*iy));
+			}
+		}
+		
+		for(int iy=0;iy<y;iy++) {
+			for(int ix=0;ix<x;ix++) {
+				System.out.print(s_list[iy][ix]);
+			}
+		}
+		
+		//shift the charector
+		
+		op_list = Encrypter.appendAll(s_list, op_list, 20, 67);
+		
+		for(int iy=0;iy<y;iy++) {
+			for(int ix=0;ix<x;ix++) {
+				out+=op_list[iy][ix];
+				System.out.print(op_list[iy][ix]);
+			}
+		}
+		
+		
+
+		save(out);
 		
 		
 		
@@ -37,5 +72,17 @@ public class Test {
 			e.printStackTrace();
 		}
 		return t.text;
+	}
+	
+	static void save(String op) {
+		try {
+            BufferedWriter out = new BufferedWriter(new FileWriter("/home/dulaj/eclipse-workspace/CipherX_v1.0/out.txt"));
+            out.write(op);
+            out.close();
+        }catch (IOException e)
+        {
+            System.out.println("Exception ");
+
+        }
 	}
 }
