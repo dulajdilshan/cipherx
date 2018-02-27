@@ -2,15 +2,19 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.annotation.processing.RoundEnvironment;
+import javax.sound.midi.Soundbank;
+
 public class Test {
 	static String out;
 	public static void main(String[] args) {
+		
 		out="";
-		int[] key = {2,34,5};
-		Encrypter encrypter = new Encrypter(key);
+		Key keys = new Key();
+		int[] key = keys.convert("230251945929957");
 		String s = input();
 		int s_len = s.length();
-		int p = 10;  // to key
+		int p = key[0];  // to key
 		int k1 = ((s_len/p)+1)*(p)-s_len;  // to key
 		int s_len1 = s_len + k1;
 		int y = s_len1/p;
@@ -29,14 +33,22 @@ public class Test {
 			}
 		}
 		
-		for(int iy=0;iy<y;iy++) {
-			for(int ix=0;ix<x;ix++) {
-				System.out.print(s_list[iy][ix]);
-			}
-		}
+//		for(int iy=0;iy<y;iy++) {
+//			for(int ix=0;ix<x;ix++) {
+//				System.out.print(s_list[iy][ix]);
+//			}
+//		}
+		System.out.println(Math.round(Math.exp(2.3025)));
+		System.out.println(Math.round(Math.exp(1.9459)));
+		System.out.println(Math.round(Math.exp(2.9957)));
+//		"2.30251.94592.9957"
+		String t= "230251945929957";
+		System.out.println(t.substring(12));
 		
+		
+/*		
 		//Encrypt
-		op_list = Encrypter.appendAll(s_list, op_list, 20, 67);
+		op_list = Encrypter.appendAll(s_list, op_list, key[2], 67);
 		
 		for(int iy=0;iy<y;iy++) {
 			for(int ix=0;ix<x;ix++) {
@@ -48,7 +60,7 @@ public class Test {
 		
 		
 		//Decrypt
-		op_list = Decrypter.appendAll(op_list, s_list, 20, 67);
+		op_list = Decrypter.appendAll(op_list, s_list, key[2], 67);
 		out="";
 		for(int iy=0;iy<y;iy++) {
 			for(int ix=0;ix<x;ix++) {
@@ -57,6 +69,8 @@ public class Test {
 			}
 		}
 		save(out,"de");
+		
+*/
 		
 		
 		
