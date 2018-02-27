@@ -6,8 +6,9 @@ public class SecretText {
 	
 	String text;
 
-	public void readText(String url) throws IOException {
+	public String readText(String url) throws IOException {
 		text = new String(Files.readAllBytes(Paths.get(url)));
+		return text;
 	}
 	
 	void addText(char c) {

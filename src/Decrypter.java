@@ -19,8 +19,6 @@ public class Decrypter {
 	}
 	static char[] setList(char[] sr,int key) {
 		char[] op = new char[sr.length];
-		
-		System.out.println(text);
 		for(int j=0;j<sr.length;j++) {
 			op[j] = notShift(sr[j],j,key);
 			text += op[j];
