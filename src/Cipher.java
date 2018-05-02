@@ -8,7 +8,7 @@ import javax.tools.DocumentationTool.DocumentationTask;
 
 public class Cipher {
 	
-	private static String url = "/home/dulaj/eclipse-workspace/CipherX_v1.0/outen.txt";
+	private static String url = "/home/dulaj/eclipse-workspace/CipherX_v1.0/";
 	private static Scanner in = new Scanner(System.in);
 	private static String op;
 	
@@ -22,13 +22,16 @@ public class Cipher {
 		System.out.println("Type 'en' for encryption, 'dy' for decryption");
 		System.out.print("Answer : ");	
 		String operator = in.next();
+		System.out.print("Source file path:");
+		url = url + in.next();
+		
 		
 		Cipher cipher = new Cipher(operator);
 		SecretText secretText = new SecretText();
 		try {
 			cipher.doIt(secretText.readText(url), op);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("No Such File");
 		}
 		
 	}
@@ -77,6 +80,8 @@ public class Cipher {
 				}
 			}
 			save(outText, "en");
+			System.out.println("Encryption done successfuly");
+			System.out.println("Check -> /home/dulaj/eclipse-workspace/CipherX_v1.0/outde.txt for the out");
 			
 		} else if (operation.equals("de")) {
 			outList = Decrypter.appendAll(inList, outList, key[2], 67);
@@ -87,6 +92,9 @@ public class Cipher {
 				}
 			}
 			save(outText.substring(0,slen0), "de");
+			System.out.println("Decryption done successfuly");
+			System.out.println("Check -> /home/dulaj/eclipse-workspace/CipherX_v1.0/outen.txt for the out");
+			
 		}else {
 			System.out.println("Bad Operation");
 		}
